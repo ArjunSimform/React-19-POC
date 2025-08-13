@@ -1,69 +1,112 @@
-# React + TypeScript + Vite
+# 📌 React 19 Task Management Board
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern **Task Management** application built with **React 19**, demonstrating the latest React features, clean architecture, and best practices for a scalable front‑end project.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- **React 19 Latest Hooks:**
+  - `useTransition` — Smooth UI updates
+  - `useActionState` & `useFormStatus` — Form submission feedback
+- **React Router DOM v7:**
+  - Nested Routes with `<Outlet />`
+  - Layout Routes
+  - Private/Protected Routes
+  - Data Loaders for prefetching
+- **TanStack React Query v5:**
+  - `queryClient.ensureQueryData()` in `loader`
+  - `useSuspenseQuery()` to consume cached + prefetched data
+- **Zod** for schema validation
+- **React Hook Form** for form state and error handling
+- **Tailwind CSS** for utility‑first styling
+- **shadcn/ui** (optional) for ready‑made UI components
+- **sonner** / **react-hot-toast** for toast notifications
+- LocalStorage‑based Authentication Context (mock auth)
+- Scalable **feature‑based folder structure**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📂 Folder Structure
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ⚙️ Tech Stack
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+| Tech                         | Purpose                                 |
+| ---------------------------- | --------------------------------------- |
+| **React 19**                 | Component library                       |
+| **TypeScript**               | Strong typing                           |
+| **React Router DOM v7**      | Routing, loaders, protected routes      |
+| **TanStack React Query v5**  | Data fetching, caching, cache hydration |
+| **Zod**                      | Validation schemas                      |
+| **react-hook-form**          | Form handling                           |
+| **Tailwind CSS**             | Styles                                  |
+| **shadcn/ui** (optional)     | UI components                           |
+| **sonner / react-hot-toast** | Toast messages                          |
+| **Vite**                     | Build + dev environment                 |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🗂 Key Design Patterns
+
+- **Feature-based Architecture** — each domain (tasks, users, auth) has its own folder for queries, hooks, and components
+- **Query Key Factory** — centralised query keys for safe cache usage
+- **Loader → ensureQueryData → useSuspenseQuery** — to prefetch in route loader & read in component
+- **Context + PrivateRoute** — simple localStorage based auth
+- **Zod + react-hook-form** — for typed validation
+- **Optimistic UI** with `useTransition` / `useActionState`
+
+---
+
+## 📦 Installation
+
+Clone repository
+git clone <your-repo-url>
+cd task-board
+
+Install dependencies
+npm install
+
+Start development server
+npm run dev
+
+---
+
+## 🚏 Data Loading Flow
+
+1. When navigating to `/dashboard`, the **loader** runs:
+
+→ Reads the same cached data, avoiding new network request (until stale).
+
+---
+
+## 🔒 Auth Flow
+
+- Login → store username in `localStorage` via `AuthContext`
+- Protected routes wrapped in `PrivateRoute`
+- Logout → remove from storage + redirect home
+
+---
+
+## 📝 Available Scripts
+
+| Command           | Action                           |
+| ----------------- | -------------------------------- |
+| `npm run dev`     | Run dev server                   |
+| `npm run build`   | Build for production             |
+| `npm run preview` | Preview production build locally |
+
+---
+
+## ✨ Future Improvements
+
+- Replace mock API with real backend
+- Add drag‑and‑drop for task ordering
+- Mutation + optimistic updates using React Query
+
+---
+
+## 📄 License
+
+This project is open‑source — feel free to use & modify.
